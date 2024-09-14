@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Produtos</title>
+</head>
+<body>
+    <a href="cadastro.html">Cadastrar Produtos</a>
+    <br>
+    <br>
+    <a href="cadastrouser.html">Cadastrar Usuários</a>
+    <h1>Listar Produtos</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody"></tbody>
+    </table>
+
+    <h1>Listar Usuários</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody"></tbody>
+    </table>
+
+
+    <script>
+        fetch("http://localhost:8000/produtos")
+        .then((dados)=>{
+            dados.json()
+            .then((dadosJson)=>{
+                const tbody = document.getElementById("tbody")
+                for(let produto of dadosJson){
+                    let tr = document.createElement("tr")
+                    tr.innerHTML=
+                    `
+                        <td>${produto.id}</td>
+                        <td>${produto.nome}</td>
+                        <td>${produto.descricao}</td>
+                        <td>${produto.preco}</td>
+                        <td>
+                            <img src="${produto.imagem}"/>
+                        </td>
+                    `
+                    tbody.appendChild(tr)
+                }
+            })
+            .catch((erro)=>alert("Erro no JSON"))
+        })
+        .catch((erro)=>alert("LIGUE O SERVIDOR COM NPM RUN DEV"))
+
+
+        fetch("http://localhost:8000/usuarios")
+        .then((dados)=>{
+            dados.json()
+            .then((dadosJson)=>{
+                const tbody = document.getElementById("tbody")
+                for(let usuarios of dadosJson){
+                    let tr = document.createElement("tr")
+                    tr.innerHTML=
+                    `
+                        <td>${usuarios.id}</td>
+                        <td>${usuarios.nome}</td>
+                        <td>${usuarios.idade}</td>
+                        <td>${usuarios.cpf}</td>
+                        <td>${usuarios.rg}</td>
+                        <td>${usuarios.endereco}</td>
+                        <td>${usuarios.estado_civil}</td>
+                    `
+                    tbody.appendChild(tr)
+                }
+            })
+            .catch((erro)=>alert("Erro no JSON"))
+        })
+        .catch((erro)=>alert("LIGUE O SERVIDOR COM NPM RUN DEV"))
+
+    </script>
+    
+</body>
+</html>
