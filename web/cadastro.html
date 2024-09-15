@@ -27,11 +27,30 @@
         input {
           padding: 20px;
         }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
       </style>
   </head>
   <body>
-    <a href="index.html">Listar Produtos</a>
+
+    <div class="buttons-container">
+      <button onclick="window.location.href='index.html'">Listar Produtos</button>
+  </div>
+
     <h1>Cadastrar Produtos</h1>
+
     <div class="formulario">
       <div class="conteudo-input">
         <label for="Id">Id</label>
@@ -57,9 +76,11 @@
         <label for="URL">URL Imagem</label>
         <input id="url" type="text" placeholder="URL Imagem" />
       </div>
+
       <div class="conteudo-input">
         <input id="botao" type="submit" value="Cadastrar" />
       </div>
+
     </div>
 
     <script>

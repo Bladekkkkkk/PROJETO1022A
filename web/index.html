@@ -4,80 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        img {
+            width: 150px; /* Ajuste o tamanho das imagens */
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
 </head>
 <body>
-    <a href="cadastro.html">Cadastrar Produtos</a>
-    <br>
-    <br>
-    <a href="cadastrouser.html">Cadastrar Usuários</a>
+     <!-- Botões para cadastrar produtos e usuários -->
+    <div class="buttons-container">
+        <button onclick="window.location.href='cadastro.html'">Cadastrar Produtos</button>
+        <button onclick="window.location.href='cadastrouser.html'">Cadastrar Usuários</button>
+    </div>
+
     <h1>Listar Produtos</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Imagem</th>
-            </tr>
-        </thead>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Imagem</th>
+                </tr>
+            </thead>
 
-        <tbody id="tbody"></tbody>
-    </table>
+            <tbody id="produtos-tbody"></tbody> <!-- ID alterado para produtos -->
+        </table>
+    </div>
 
     <h1>Listar Usuários</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Imagem</th>
-            </tr>
-        </thead>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>CPF</th>
+                    <th>RG</th>
+                    <th>Endereço</th>
+                    <th>Estado Civil</th>
+                </tr>
+            </thead>
 
-        <tbody id="tbody"></tbody>
-    </table>
-
+            <tbody id="usuarios-tbody"></tbody> <!-- ID alterado para usuários -->
+        </table>
+    </div>
 
     <script>
         fetch("http://localhost:8000/produtos")
-        .then((dados)=>{
+        .then((dados) => {
             dados.json()
-            .then((dadosJson)=>{
-                const tbody = document.getElementById("tbody")
-                for(let produto of dadosJson){
-                    let tr = document.createElement("tr")
-                    tr.innerHTML=
-                    `
+            .then((dadosJson) => {
+                const tbody = document.getElementById("produtos-tbody"); // Usando o ID correto
+                for (let produto of dadosJson) {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `
                         <td>${produto.id}</td>
                         <td>${produto.nome}</td>
                         <td>${produto.descricao}</td>
                         <td>${produto.preco}</td>
                         <td>
-                            <img src="${produto.imagem}"/>
+                            <img src="${produto.imagem}" alt="${produto.nome}" />
                         </td>
-                    `
-                    tbody.appendChild(tr)
+                    `;
+                    tbody.appendChild(tr);
                 }
             })
-            .catch((erro)=>alert("Erro no JSON"))
+            .catch((erro) => alert("Erro no JSON"));
         })
-        .catch((erro)=>alert("LIGUE O SERVIDOR COM NPM RUN DEV"))
-
+        .catch((erro) => alert("LIGUE O SERVIDOR COM NPM RUN DEV"));
 
         fetch("http://localhost:8000/usuarios")
-        .then((dados)=>{
+        .then((dados) => {
             dados.json()
-            .then((dadosJson)=>{
-                const tbody = document.getElementById("tbody")
-                for(let usuarios of dadosJson){
-                    let tr = document.createElement("tr")
-                    tr.innerHTML=
-                    `
+            .then((dadosJson) => {
+                const tbody = document.getElementById("usuarios-tbody"); // Usando o ID correto
+                for (let usuarios of dadosJson) {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `
                         <td>${usuarios.id}</td>
                         <td>${usuarios.nome}</td>
                         <td>${usuarios.idade}</td>
@@ -85,15 +157,13 @@
                         <td>${usuarios.rg}</td>
                         <td>${usuarios.endereco}</td>
                         <td>${usuarios.estado_civil}</td>
-                    `
-                    tbody.appendChild(tr)
+                    `;
+                    tbody.appendChild(tr);
                 }
             })
-            .catch((erro)=>alert("Erro no JSON"))
+            .catch((erro) => alert("Erro no JSON"));
         })
-        .catch((erro)=>alert("LIGUE O SERVIDOR COM NPM RUN DEV"))
-
+        .catch((erro) => alert("LIGUE O SERVIDOR COM NPM RUN DEV"));
     </script>
-    
 </body>
 </html>

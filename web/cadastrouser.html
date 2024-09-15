@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Usuários</title>
-
     <style>
         body {
           display: flex;
@@ -12,7 +11,7 @@
           align-items: center;
         }
         .formulario {
-          width: 80vw;
+          width: 50vw;
           padding: 100px;
           display: flex;
           flex-direction: column;
@@ -25,8 +24,23 @@
           display: flex;
           flex-direction: column;
         }
-        input {
-          padding: 20px;
+        input, select {
+        padding: 20px;
+      }
+
+      button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
       </style>
 
@@ -34,7 +48,11 @@
   </head>
 
   <body>
-    <a href="index.html">Listar Usuários</a>
+
+    <div class="buttons-container">
+      <button onclick="window.location.href='index.html'">Listar Usuários</button>
+  </div>
+  
     <h1>Cadastrar Usuários</h1>
     <div class="formulario">
 
@@ -70,14 +88,19 @@
   
       <div class="conteudo-input">
       <label for="Estado_civil">Estado civil</label>
-      <input id="estado_civil" type="text" placeholder="Estado_civil"/>
+      
+      <select id="estado_civil" placeholder="Estado_civil">
+        <option value="solteiro">Solteiro</option>
+        <option value="casado">Casado</option>
+      </select>
       </div>
-    </div>
-
 
       <div class="conteudo-input">
         <input id="botao" type="submit" value="Cadastrar" />
       </div>
+
+    </div>
+
     </div>
 
     <script>
